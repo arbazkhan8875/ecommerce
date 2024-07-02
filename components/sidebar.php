@@ -40,20 +40,7 @@
             <li class="">
               <a href="/smarthr-laravel/light/public/tickets"><i class="la la-ticket"></i> <span>Tickets</span></a>
             </li>
-            <li class="menu-title">
-              <span>HR</span>
-            </li>
-            <li class="submenu">
-              <a href="#"><i class="la la-files-o"></i> <span> Sales </span> <span class="menu-arrow"></span></a>
-              <ul style="display: none;">
-                <li><a class="" href="/smarthr-laravel/light/public/estimates">Estimates</a></li>
-                <li><a class="" href="/smarthr-laravel/light/public/invoices">Invoices</a></li>
-                <li><a class="" href="/smarthr-laravel/light/public/payments">Payments</a></li>
-                <li><a class="" href="/smarthr-laravel/light/public/expenses">Expenses</a></li>
-                <li><a class="" href="/smarthr-laravel/light/public/provident-fund">Provident Fund</a></li>
-                <li><a class="" href="/smarthr-laravel/light/public/taxes">Taxes</a></li>
-              </ul>
-            </li>
+           
             <li class="submenu">
               <a href="#"><i class="la la-files-o"></i> <span> Accounting </span> <span class="menu-arrow"></span></a>
               <ul style="display: none;">
