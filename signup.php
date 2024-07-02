@@ -1,45 +1,26 @@
 <?php
 include './components/dbconnection.php';
 
-session_start();
-
-
-// फॉर्म से डेटा प्राप्त करें
-if(isset($_POST['email']) && $_POST['password']){
+if(isset($_POST['email']) && isset($_POST['password'])){
+    $user = $_POST['username'];
     $email = $_POST['email'];
-    $userpassword = $_POST['password'];
-    // डेटा को डेटाबेस में खोजें
-$sql = "SELECT id, username, password FROM users WHERE email = '$email'";
-$result = $conn->query($sql);
-// echo '<pre>';
-// print_r($result);
-if ($result->num_rows > 0) {
-    // उपयोगकर्ता डेटा प्राप्त करें
-    $row = $result->fetch_assoc();
-    // echo '<pre>';
-// print_r($row);die;
-    // पासवर्ड वेरिफाई करें
-    if (password_verify($userpassword, $row['password'])) {
-        // लॉगिन सफल
-        $_SESSION['username'] = $row['username'];
-        // echo "Login successful! Welcome, " . $_SESSION['username'];
-        header('Location: http://localhost/phpclass/index.php');
+    $pass = $_POST['password'];
 
+    // पासवर्ड को हैश करें
+    $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
+
+    // डेटा को डेटाबेस में डालें
+    $sql = "INSERT INTO users (username, email, password) VALUES ('$user', '$email', '$hashed_password')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Registration successful!";
+        header('Location: http://localhost/phpclass/login.php');
     } else {
-        // पासवर्ड गलत
-        echo "Invalid password.";
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
-} else {
-    // उपयोगकर्ता नहीं मिला
-    echo "No user found with that Email.";
-}
-$conn->close();
-}
 
-// कनेक्शन बंद करें
-
+    }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,9 +64,15 @@ $conn->close();
                     <form method="POST" action="">
                     
                         <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="text" placeholder="Email" id="email" class="form-control" name="email"
+                            <label>User Name</label>
+                            <input type="text" placeholder="Enter Your User Name" id="username" class="form-control" name="username"
                                 >
+                            <div class="text-danger pt-2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="text" placeholder="Email" id="email" class="form-control" name="email">
                             <div class="text-danger pt-2">
                             </div>
                         </div>

@@ -1,7 +1,13 @@
 <?php
 
-include('./components/header.php');
+session_start();
+// echo $_SESSION['username'];die;
+if(isset($_SESSION['username']) ){
+  // session_destroy();
+  include('./components/header.php');
 include('./components/sidebar.php');
+  // die;
+  
 ?>
 <!-- // Main Content -->
 <div class="page-wrapper" style="min-height: 601px;">
@@ -10,7 +16,7 @@ include('./components/sidebar.php');
   <div class="page-header">
     <div class="row">
       <div class="col-sm-12">
-        <h3 class="page-title">Welcome Admin!</h3>
+        <h3 class="page-title">Welcome <?php echo $_SESSION['username'];?></h3>
         <ul class="breadcrumb">
           <li class="breadcrumb-item active">Dashboard</li>
         </ul>
@@ -1044,3 +1050,7 @@ include('./components/sidebar.php');
 </div>
 <?php
 include('./components/footer.php');
+}else{
+  // echo 'sdkjhasfdj';die;
+  header('Location: http://localhost/phpclass/login.php');
+}
