@@ -26,4 +26,5 @@ include 'dbconnection.php';
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <link rel="stylesheet" href="/phpclass/assets/css/app.css">
+  <link rel="stylesheet" href="/phpclass/assets/css/style.css">
 </head>
