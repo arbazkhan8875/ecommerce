@@ -13,5 +13,5 @@ if ($conn->query($sql) === TRUE) {
     $message_type = "error"; // त्रुटि का प्रकार
 }
 
-header('Location: http://localhost/phpclass/categories/index.php?message=' . urlencode($message) . '&type=' . urlencode($message_type));
+header('Location: http://localhost/phpclass/categories/index.php?message=' . ($message) . '&type=' . urlencode($message_type));
 exit();
