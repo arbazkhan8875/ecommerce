@@ -21,6 +21,8 @@ if(isset($_POST['name']) && isset($_POST['id'])){
     header('Location: http://localhost/phpclass/categories/index.php?message=' . urlencode($message) . '&type=' . urlencode($message_type));
     exit();
 }
+
+
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $sql = "SELECT id, name FROM categories WHERE id = $id";

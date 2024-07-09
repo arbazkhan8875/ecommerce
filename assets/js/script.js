@@ -6,7 +6,7 @@ $(document).ready(function() {
     $(".edit-btn").click(function() {
         // alert('asdasd')
 
-        var id = $(this).data("id");
+        var id = $(this).data("id"); 
         $.ajax({
             url: 'edit.php?id='+id,
             type: 'GET',

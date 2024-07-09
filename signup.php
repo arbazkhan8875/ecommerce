@@ -2,7 +2,7 @@
 include './components/dbconnection.php';
 
 if(isset($_POST['email']) && isset($_POST['password'])){
-    $user = $_POST['username'];
+    $user = $_POST['username'];    
     $email = $_POST['email'];
     $pass = $_POST['password'];
 

@@ -11,8 +11,9 @@ if(isset($_POST['email']) && $_POST['password']){
     // डेटा को डेटाबेस में खोजें
 $sql = "SELECT id, username, password FROM users WHERE email = '$email'";
 $result = $conn->query($sql);
-// echo '<pre>';
-// print_r($result);
+//  echo '<pre>';
+//  print_r($result);
+//  die();
 if ($result->num_rows > 0) {
     // उपयोगकर्ता डेटा प्राप्त करें
     $row = $result->fetch_assoc();

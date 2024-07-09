@@ -8,6 +8,19 @@ if(isset($_SESSION['username']) ){
 include('../components/sidebar.php');
   // die;
   
+  
+
+  // Build the query with filters
+  $sql = "SELECT id, name, parent_id, is_active FROM categories WHERE is_deleted = 0";
+
+  $filter_name = isset($_GET['filter_name']) ? $_GET['filter_name'] : '';
+  if(isset($_GET['filter_name'])){
+    if (!empty($filter_name)) {
+        $sql .= " AND name LIKE '%$filter_name%'";
+    }
+  }
+// echo $sql;die;
+  $result = $conn->query($sql);
 ?>
 <!-- // Main Content -->
 <div class="page-wrapper" style="min-height: 601px;">
@@ -19,8 +32,7 @@ if (isset($_GET['message']) && isset($_GET['type'])) {
   echo "<p class='notifications notification-{$message_type}'>{$message}</p>";
 }
 
-$sql = "SELECT id, name, parent_id, is_active FROM categories WHERE is_deleted = 0";
-    $result = $conn->query($sql);
+
 
    
 ?>
@@ -45,26 +57,21 @@ $sql = "SELECT id, name, parent_id, is_active FROM categories WHERE is_deleted =
 
 
         <div class="row filter-row">
+        <form method="GET" action="index.php">
             <div class="col-sm-6 col-md-3">
                 <div class="form-group form-focus">
                     <div class="cal-icon">
-                        <input class="form-control floating datetimepicker" type="text">
+                        <input class="form-control floating " type="text" name="filter_name" value="<?= $filter_name ?>">
                     </div>
                     <label class="focus-label">From</label>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group form-focus">
-                    <div class="cal-icon">
-                        <input class="form-control floating datetimepicker" type="text">
-                    </div>
-                    <label class="focus-label">To</label>
-                </div>
-            </div>
+           
             
             <div class="col-sm-6 col-md-3">
-                <a href="#" class="btn btn-success w-100"> Search </a>
+                <button  class="btn btn-success w-100" type="submit"> Search </button>
             </div>
+        </form>
         </div>
 
         <div class="row">
@@ -106,12 +113,12 @@ $sql = "SELECT id, name, parent_id, is_active FROM categories WHERE is_deleted =
                                             aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             
-                                                    <button class="dropdown-item edit-btn" data-id="<?php echo $row["id"] ?>"><i
+                                            <button class="dropdown-item edit-btn" data-id="<?php echo $row["id"] ?>"><i
                                                     class="fa fa-pencil m-r-5"></i>Edit</button>
-                                            <!-- <a class="dropdown-item"
-                                                href="https://smarthr.dreamguystech.com/smarthr-laravel/light/public/invoice-view"><i
-                                                    class="fa fa-eye m-r-5"></i> View</a>
-                                            <a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o m-r-5"></i>
+                                             <a class="dropdown-item"
+                                                href="delete.php?id=<?php echo $row["id"] ?>"><i
+                                                    class="fa fa-eye m-r-5"></i> Delete</a>
+                                           <!-- <a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o m-r-5"></i>
                                                 Download</a>
                                             <a class="dropdown-item" href="#"><i class="fa fa-trash-o m-r-5"></i>
                                                 Delete</a> -->
