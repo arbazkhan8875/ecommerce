@@ -1,9 +1,9 @@
 <?php
 session_start();
 if(isset($_SESSION['username'])){
+    // echo $_SESSION['username'];die;
     include('../components/header.php');
     include('../components/sidebar.php');
-
     // Set the number of records per page
     $records_per_page = 2;
 
@@ -98,7 +98,10 @@ if(isset($_SESSION['username'])){
                                         <td><a href="smarthr-laravel/light/public/invoice-view"><?= $row["id"] ?></a></td>
                                         <td><?= $row["name"] ?></td>
                                         <td>-</td>
-                                        <td><?= $row["is_active"] == 0 ? "Active" : "DeActive" ?></td>
+                                        <td> <button class="btn btn-toggle-status" data-id="<?= $row['id'] ?>" data-status="<?= $row['is_active'] ?>">
+                                                <?= $row['is_active'] == 0 ? "Activate" : "Deactivate" ?>
+                                            </button>
+                                        </td>
                                         <td class="text-end">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>

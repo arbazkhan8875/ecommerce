@@ -21,4 +21,30 @@ $(document).ready(function() {
     $(document).on('click', '#closePopup', function() {
         $("#editPopup").hide();
     });
+
+    $('.btn-toggle-status').click(function() {
+        var button = $(this);
+        var id = button.data('id');
+        var currentStatus = button.data('status');
+        var newStatus = currentStatus == 0 ? 1 : 0;
+        
+        $.ajax({
+            url: 'update_status.php',
+            type: 'POST',
+            data: {
+                id: id,
+                status: newStatus
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    button.text(newStatus == 0 ? "Activate" : "Deactivate");
+                    button.data('status', newStatus);
+                    alert('Status updated successfully!');
+                } else {
+                    alert('Failed to update status.');
+                }
+            }
+        });
+    });
 });
